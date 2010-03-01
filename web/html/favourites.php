@@ -9,7 +9,7 @@ function getPkgs($userid) {
     $dbh = db_connect();
     $userid = mysql_real_escape_string($userid);
 
-    $result = db_query("SELECT PackageVotes.UsersID, PackageVotes.PackageID, Packages.Name FROM PackageVotes LEFT JOIN Packages ON (Packages.ID = PackageVotes.PackageID) WHERE PackageVotes.UsersID = $userid", $dbh);
+    $result = db_query("SELECT PackageVotes.UsersID, PackageVotes.PackageID, Packages.Name, Packages.NumVotes FROM PackageVotes LEFT JOIN Packages ON (Packages.ID = PackageVotes.PackageID) WHERE PackageVotes.UsersID = $userid ORDER BY Name", $dbh);
 
     return $result;
 }
@@ -42,7 +42,7 @@ $pkgs = getPkgs(uid_from_sid($_COOKIE['AURSID']));
 print "<ul>";
 
 while($row = mysql_fetch_object($pkgs)) {
-    print "<li><a href=/packages.php?ID=$row->PackageID>$row->Name</a></li>";
+    print "<li><a href=packages.php?ID=$row->PackageID>$row->Name</a> - $row->NumVotes</li>";
 }
 
 print "</ul>";
