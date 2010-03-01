@@ -27,13 +27,10 @@ if(!$acc) {
     exit();
 }
 
-?>
-<div class = "pgbox">
-<div class = "pgboxtitle">
-<span class = "f3"> Favourite Packages </span>
-<div class = "pgboxbody">
-
-<?php
+print "<div class = 'pgbox'>";
+print "<div class = 'pgboxtitle'>";
+print "<span class = 'f3'>" . __("Favourite Packages") . "</span>";
+print "<div class = 'pgboxbody'>";
 
 $pkgs = getPkgs(uid_from_sid($_COOKIE['AURSID']));
 
