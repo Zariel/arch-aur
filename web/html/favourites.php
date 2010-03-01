@@ -19,18 +19,23 @@ if(isset($_COOKIE['AURSID'])) {
 } else {
     $acc = "";
 }
-
-if(!$acc) {
-    print __("You must be logged in before you can view favourite packages");
-    print "<br />\n";
-    html_footer(AUR_VERSION);
-    exit();
-}
-
 print "<div class = 'pgbox'>";
 print "<div class = 'pgboxtitle'>";
 print "<span class = 'f3'>" . __("Favourite Packages") . "</span>";
 print "<div class = 'pgboxbody'>";
+
+if(!$acc) {
+    print __("You must be logged in before you can view favourite packages");
+    print "<br />\n";
+    for($i = 0; $i < 3; $i++) {
+        print "</div>";
+    }
+
+    html_footer(AUR_VERSION);
+    exit();
+}
+
+
 
 $pkgs = getPkgs(uid_from_sid($_COOKIE['AURSID']));
 
